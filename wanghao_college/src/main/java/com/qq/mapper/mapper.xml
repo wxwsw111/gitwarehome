@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qq.dao.dao">
+   <select id="login" resultType="com.qq.entity.user" parameterType="com.qq.entity.user">
+    select * from user where uname=#{uname} and upwd=#{upwd}
+   </select>
+   <select id="zlist" resultType="map" parameterType="com.qq.entity.student">
+    select s.*,q.qname from student s left join qs q on s.qid=q.qid
+    <where>
+      <if test="sname!=null and sname!=''">
+       sname like concat('%',#{sname},'%')
+      </if>
+      <if test="qid!=null and qid!=''">
+       and s.qid=#{qid}
+      </if>
+    </where>
+    limit #{startPos},#{pageSize}
+   </select>
+   <select id="count" resultType="int" parameterType="com.qq.entity.student">
+    select count(*) from student  
+     <where>
+      <if test="sname!=null and sname!=''">
+      sname like concat('%',#{sname},'%')
+      </if>
+    </where>
+    </select>
+   <select id="numcount" resultType="int" parameterType="int">
+    select count(*) from student where qid=#{value}
+   </select>
+   <select id="toupd" resultType="com.qq.entity.student" parameterType="int">
+    select * from student where sid=#{value}
+   </select>
+   <select id="llist" resultType="com.qq.entity.qs" parameterType="com.qq.entity.qs">
+    select * from qs
+   </select>
+   <select id="supd" resultType="com.qq.entity.qs" parameterType="com.qq.entity.qs">
+    select * from qs where qid=#{qid}
+   </select>
+   <select id="zs" resultType="int" parameterType="int">
+    select count(*) from student where qid=#{value}
+   </select>
+   <select id="mlist" resultType="com.qq.entity.mx" parameterType="com.qq.entity.mx">
+    select * from mx where mid=#{mid}
+   </select>
+   <update id="upd" parameterType="com.qq.entity.student">
+    update student set sname=#{sname},sex=#{sex},sxy=#{sxy},sdatea=#{sdatea},qid=#{qid},snum=#{snum} where sid=#{sid}
+   </update>
+   <update id="qtupd" parameterType="com.qq.entity.student">
+    update student set snum=#{snum} where qid=#{qid}
+   </update>
+   <update id="mmupd" parameterType="com.qq.entity.mx">
+    update mx set mnum=#{mnum},ldate=#{ldate} where mname=#{mname}
+   </update>
+   <insert id="add" parameterType="com.qq.entity.mx">
+     insert into mx values(#{mid},#{mname},#{mnum},#{rdate},#{ldate})
+   </insert>
+  </mapper>
