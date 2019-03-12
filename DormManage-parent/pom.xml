@@ -13,6 +13,7 @@
 		<module>DormMange_pojo</module>
 		<module>DormMange_dao</module>
 		<module>DormManage_login_web</module>
+		
 	</modules>
 
 	<dependencies>
@@ -124,14 +125,6 @@
 
 
 	</dependencies>
-	
-	 <modules>
-       <module>DormManage_login_web</module>
-       <module>DormMange_dao</module>
-       <module>DormMange_login_interface</module>
-       <module>DormMange_login_service</module>
-       <module>DormMange_pojo</module>
-    </modules>
 	
 	<build>
 		<plugins>			

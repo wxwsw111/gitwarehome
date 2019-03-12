@@ -14,9 +14,14 @@ public class LoginController {
 @Autowired
 DormService dormService;
 
-@RequestMapping(value="/login")
+@RequestMapping("login")
 public String login(User us) {
 	List<User> list=dormService.list(us);
+	if(us!=null){
+		System.out.println(us);
+	}else {
+		System.out.println("错");
+	}
 	return "list";	
 }
 }
